@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jay McDonough | Full-Stack Web Developer & AI Architect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body { font-family: system-ui, sans-serif; }
+    .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%); }
+    .glow-cyan { box-shadow: 0 0 30px rgba(34, 211, 238, 0.7); }
+    .typing { overflow: hidden; white-space: nowrap; border-right: 3px solid #22d3ee; animation: blink 0.7s step-end infinite; }
+    @keyframes blink { 50% { border-color: transparent; } }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-200">
+
+  <!-- [Your existing Navbar, Hero, About, Experience, Projects, Schedule Interview, and Footer remain exactly as before] -->
+  <!-- (I kept them all intact so you can just replace your file) -->
+
+  <!-- NEW POPUP MODAL -->
+  <div id="hirePopup" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-[9999]">
+    <div class="bg-slate-900 rounded-3xl max-w-lg w-full mx-4 p-8 relative">
+      <button onclick="closePopup()" class="absolute top-4 right-4 text-3xl text-slate-400 hover:text-white">×</button>
+      
+      <h3 class="text-3xl font-bold text-center mb-6">Quick Question</h3>
+      
+      <p class="text-xl text-center leading-relaxed mb-8">
+        Are you looking to hire an experienced full-stack DevOps programmer<br>
+        who is accustomed to working remotely?
+      </p>
+      
+      <p class="text-cyan-400 text-center text-lg mb-8">If so — let's get to know each other.</p>
+      
+      <div class="space-y-6">
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Your Phone Number</label>
+          <input id="phoneInput" type="tel" 
+                 class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-cyan-400" 
+                 placeholder="(555) 123-4567">
+        </div>
+        
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Best Time to Call</label>
+          <input id="timeInput" type="text" 
+                 class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-cyan-400" 
+                 placeholder="e.g. Tuesday 10am EST">
+        </div>
+      </div>
+
+      <button onclick="submitPopup()" 
+              class="mt-8 w-full bg-cyan-400 text-slate-950 py-5 rounded-2xl text-xl font-semibold hover:bg-cyan-300 transition">
+        Yes — Let's Schedule a Quick Call
+      </button>
+      
+      <button onclick="closePopup()" 
+              class="mt-4 w-full text-slate-400 hover:text-white py-3 text-sm">
+        Maybe later
+      </button>
+    </div>
+  </div>
+
+  <!-- Rest of your existing scripts + AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Typing animation (unchanged)
+    const text = "Full-Stack Developer & AI Solutions Architect";
+    let i = 0;
+    const typingEl = document.getElementById('typing');
+    function type() {
+      if (i < text.length) {
+        typingEl.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, 80);
+      }
+    }
+    setTimeout(type, 800);
+
+    // POPUP LOGIC
+    function showPopup() {
+      document.getElementById('hirePopup').classList.remove('hidden');
+      document.getElementById('hirePopup').classList.add('flex');
+    }
+
+    function closePopup() {
+      document.getElementById('hirePopup').classList.add('hidden');
+      document.getElementById('hirePopup').classList.remove('flex');
+    }
+
+    function submitPopup() {
+      const phone = document.getElementById('phoneInput').value.trim();
+      const time = document.getElementById('timeInput').value.trim();
+      
+      if (!phone) {
+        alert("Please enter your phone number");
+        return;
+      }
+      
+      // Open email client with pre-filled info
+      const subject = "Interested in Hiring – Phone Call Request";
+      const body = `Hi Jay,%0A%0AI'm interested in hiring an experienced full-stack DevOps programmer.%0A%0APhone: ${phone}%0ABest time to call: ${time}%0A%0ALet's schedule a quick call!`;
+      window.location.href = `mailto:jaymcdonough.com@gmail.com?subject=${subject}&body=${body}`;
+      
+      closePopup();
+      
+      // Thank you message
+      setTimeout(() => {
+        alert("Thank you! I'll reach out shortly to schedule our call.");
+      }, 800);
+    }
+
+    // Show popup after 5 seconds
+    setTimeout(() => {
+      // Only show once per session
+      if (!localStorage.getItem('popupShown')) {
+        showPopup();
+        localStorage.setItem('popupShown', 'true');
+      }
+    }, 5000);
+
+    // Your existing quickCalendar and quickMeet functions
+    function quickCalendar() {
+      const url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Interview+with+Jay+McDonough&dates=20260325T140000Z/20260325T150000Z&details=Full-Stack+Discussion&location=Google+Meet";
+      window.open(url, '_blank');
+    }
+    function quickMeet() {
+      window.open('https://meet.google.com/new', '_blank');
+    }
+  </script>
+</body>
+</html>
