@@ -19,6 +19,37 @@
       .hero-text { order: 1; }
       .hero-image { order: 2; }
     }
+
+/* The background layer */
+.overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+/* The actual box */
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+
+
+
+
+
   </style>
 </head>
 <body class="bg-slate-950 text-slate-200">
@@ -167,6 +198,39 @@
     </div>
   </section>
 
+<!-- POPUP -->
+  <div id="hirePopup" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center z-[9999]">
+    <div class="bg-slate-900 rounded-3xl max-w-lg w-full mx-4 p-8 relative">
+      <button onclick="closePopup()" class="absolute top-4 right-4 text-3xl text-slate-400 hover:text-white">×</button>
+      
+      <h3 class="text-3xl font-bold text-center mb-6">Quick Question</h3>
+      
+      <p class="text-xl text-center leading-relaxed mb-8">
+        Are you looking to hire an experienced full-stack DevOps programmer<br>
+        that is accustomed to working remotely?
+      </p>
+      
+      <p class="text-cyan-400 text-center text-lg mb-8">If so — let's get to know each other.</p>
+      
+      <div class="space-y-6">
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Your Phone Number</label>
+          <input id="phoneInput" type="tel" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-cyan-400" placeholder="(555) 123-4567">
+        </div>
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Best Time to Call</label>
+          <input id="timeInput" type="text" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-cyan-400" placeholder="e.g. Tuesday 10am EST">
+        </div>
+      </div>
+
+      <button onclick="submitPopup()" class="mt-8 w-full bg-cyan-400 text-slate-950 py-5 rounded-2xl text-xl font-semibold hover:bg-cyan-300 transition">
+        Yes — Let's Get Started Right Away
+      </button>
+      
+      <button onclick="closePopup()" class="mt-4 w-full text-slate-400 hover:text-white py-3 text-sm">Maybe later</button>
+    </div>
+  </div>
+
   <!-- Contact + Footer -->
   <footer id="contact" class="bg-black py-16 text-center">
     <p class="text-2xl mb-4">Jay McDonough • (608) 347-3871</p>
@@ -199,5 +263,116 @@
       window.open('https://meet.google.com/new', '_blank');
     }
   </script>
+<!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Typing animation
+    const text = "Full-Stack Developer & AI Solutions Architect";
+    let i = 0;
+    const typingEl = document.getElementById('typing');
+    function type() {
+      if (i < text.length) {
+        typingEl.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, 80);
+      }
+    }
+    setTimeout(type, 800);
+
+    // Popup functions
+    function showPopup() {
+      document.getElementById('hirePopup').classList.remove('hidden');
+      document.getElementById('hirePopup').classList.add('flex');
+    }
+
+    function closePopup() {
+      document.getElementById('hirePopup').classList.add('hidden');
+      document.getElementById('hirePopup').classList.remove('flex');
+    }
+
+    function submitPopup() {
+      const phone = document.getElementById('phoneInput').value.trim();
+      const time = document.getElementById('timeInput').value.trim();
+      
+      if (!phone) {
+        alert("Please enter your phone number");
+        return;
+      }
+
+      const subject = "Hiring Inquiry - Full-Stack DevOps Programmer";
+      const body = `Hi Jay,%0A%0AI'm interested in hiring an experienced full-stack DevOps programmer who works remotely.%0A%0APhone: ${phone}%0ABest time to call: ${time}%0A%0ALet's get started right away!`;
+      
+      window.location.href = `mailto:jaymcdonough.com@gmail.com?subject=${subject}&body=${body}`;
+      closePopup();
+      
+      setTimeout(() => {
+        alert("Thank you! I'll reach out shortly to schedule our call.");
+      }, 800);
+    }
+
+    // Show popup after 5 seconds (once per session)
+    setTimeout(() => {
+      if (!localStorage.getItem('popupShown')) {
+        showPopup();
+        localStorage.setItem('popupShown', 'true');
+      }
+    }, 5000);
+
+    // Your existing quickCalendar and quickMeet functions
+    function quickCalendar() {
+      const url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meeting+with+Jay+McDonough&dates=20260325T140000Z/20260325T150000Z&details=Web+project+discussion&location=Google+Meet";
+      window.open(url, '_blank');
+    }
+    function quickMeet() {
+      window.open('https://meet.google.com/new', '_blank');
+    }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+window.onload = function() {
+    // 5000 milliseconds = 5 seconds
+    setTimeout(function() {
+        document.getElementById('popup-overlay').style.display = 'block';
+    }, 5000);
+
+    // Close the popup when the button is clicked
+    document.getElementById('close-btn').onclick = function() {
+        document.getElementById('popup-overlay').style.display = 'none';
+    };
+};
+
+</script>
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body { font-family: system-ui, sans-serif; }
+    .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%); }
+    .glow-cyan { box-shadow: 0 0 30px rgba(34, 211, 238, 0.7); }
+    .typing { overflow: hidden; white-space: nowrap; border-right: 3px solid #22d3ee; animation: blink 0.7s step-end infinite; }
+    @keyframes blink { 50% { border-color: transparent; } }
+    .hero-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 768px) { 
+      .hero-grid { grid-template-columns: 1fr 1fr; } 
+      .hero-text { order: 1; }
+      .hero-image { order: 2; }
+    }
+  </style>
+</head>
+
+<!-- popup -->
+<div id="popup-overlay" class="overlay">
+    <div class="popup-content">
+        <h2>Welcome!</h2>
+        <p>Thanks for stopping by. Check out my latest project!</p>
+        <button id="close-btn">Close</button>
+    </div>
+</div>
+ <!-- popup end -->
 </body>
 </html>
