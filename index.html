@@ -227,6 +227,15 @@
     </div>
   </div>
 
+  <!-- popup -->
+  <div id="popup-overlay" class="overlay">
+      <div class="popup-content">
+          <h2>Welcome!</h2>
+          <p>Thanks for stopping by. Check out my latest project!</p>
+          <button id="close-btn">Close</button>
+      </div>
+  </div>
+
   <!-- Contact + Footer -->
   <footer id="contact" class="bg-black py-16 text-center">
     <p class="text-2xl mb-4">Jay McDonough • (608) 347-3871</p>
@@ -258,6 +267,18 @@
     function quickMeet() {
       window.open('https://meet.google.com/new', '_blank');
     }
+
+    window.onload = function() {
+        // 5000 milliseconds = 5 seconds
+        setTimeout(function() {
+            document.getElementById('popup-overlay').style.display = 'block';
+        }, 5000);
+
+        // Close the popup when the button is clicked
+        document.getElementById('close-btn').onclick = function() {
+            document.getElementById('popup-overlay').style.display = 'none';
+        };
+    };
   </script>
 <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -340,7 +361,44 @@ window.onload = function() {
     };
 };
 
-</script>
+    // Popup functions
+    function showPopup() {
+      document.getElementById('hirePopup').classList.remove('hidden');
+      document.getElementById('hirePopup').classList.add('flex');
+    }
+
+    function closePopup() {
+      document.getElementById('hirePopup').classList.add('hidden');
+      document.getElementById('hirePopup').classList.remove('flex');
+    }
+
+    function submitPopup() {
+      const phone = document.getElementById('phoneInput').value.trim();
+      const time = document.getElementById('timeInput').value.trim();
+      
+      if (!phone) {
+        alert("Please enter your phone number");
+        return;
+      }
+
+      const subject = "Hiring Inquiry - Full-Stack DevOps Programmer";
+      const body = `Hi Jay,%0A%0AI'm interested in hiring an experienced full-stack DevOps programmer who works remotely.%0A%0APhone: ${phone}%0ABest time to call: ${time}%0A%0ALet's get started right away!`;
+      
+      window.location.href = `mailto:jaymcdonough.com@gmail.com?subject=${subject}&body=${body}`;
+      closePopup();
+      
+      setTimeout(() => {
+        alert("Thank you! I'll reach out shortly to schedule our call.");
+      }, 800);
+    }
+
+    // Show popup after 5 seconds (once per session)
+    setTimeout(() => {
+      if (!localStorage.getItem('popupShown')) {
+        showPopup();
+        localStorage.setItem('popupShown', 'true');
+      }
+    }, 5000);
 
 
 
