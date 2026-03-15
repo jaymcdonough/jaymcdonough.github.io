@@ -20,33 +20,6 @@
       .hero-image { order: 2; }
     }
  </style>
-
- <style>
-/* The background layer */
-.overlay {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-}
-
-/* The actual box */
-.popup-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-  </style>
 </head>
 <body class="bg-slate-950 text-slate-200">
 
@@ -227,20 +200,13 @@
     </div>
   </div>
 
-  <!-- popup -->
-  <div id="popup-overlay" class="overlay">
-      <div class="popup-content">
-          <h2>Welcome!</h2>
-          <p>Thanks for stopping by. Check out my latest project!</p>
-          <button id="close-btn">Close</button>
-      </div>
-  </div>
+
 
   <!-- Contact + Footer -->
   <footer id="contact" class="bg-black py-16 text-center">
     <p class="text-2xl mb-4">Jay McDonough • (608) 347-3871</p>
     <a href="mailto:jaymcdonough.com@gmail.com" class="text-cyan-400 underline">jaymcdonough.com@gmail.com</a>
-    <p class="mt-12 text-sm text-slate-500">Built with ❤️ and Grok AI • © 2026</p>
+    <p class="mt-12 text-sm text-slate-500">Built with ❤️ and Grok / Copiolt AI & Hosted on Github • © 2026</p>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -268,36 +234,9 @@
       window.open('https://meet.google.com/new', '_blank');
     }
 
-    window.onload = function() {
-        // 5000 milliseconds = 5 seconds
-        setTimeout(function() {
-            document.getElementById('popup-overlay').style.display = 'block';
-        }, 5000);
-
-        // Close the popup when the button is clicked
-        document.getElementById('close-btn').onclick = function() {
-            document.getElementById('popup-overlay').style.display = 'none';
-        };
-    };
   </script>
 <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 1000, once: true });
-
-    // Typing animation
-    const text = "Full-Stack Developer & AI Solutions Architect";
-    let i = 0;
-    const typingEl = document.getElementById('typing');
-    function type() {
-      if (i < text.length) {
-        typingEl.textContent += text.charAt(i);
-        i++;
-        setTimeout(type, 80);
-      }
-    }
-    setTimeout(type, 800);
-
     // Popup functions
     function showPopup() {
       document.getElementById('hirePopup').classList.remove('hidden');
@@ -346,88 +285,9 @@
       window.open('https://meet.google.com/new', '_blank');
     }
   </script>
-<script src="https://cdn.tailwindcss.com"></script>
-
-<script>
-window.onload = function() {
-    // 5000 milliseconds = 5 seconds
-    setTimeout(function() {
-        document.getElementById('popup-overlay').style.display = 'block';
-    }, 5000);
-
-    // Close the popup when the button is clicked
-    document.getElementById('close-btn').onclick = function() {
-        document.getElementById('popup-overlay').style.display = 'none';
-    };
-};
-
-    // Popup functions
-    function showPopup() {
-      document.getElementById('hirePopup').classList.remove('hidden');
-      document.getElementById('hirePopup').classList.add('flex');
-    }
-
-    function closePopup() {
-      document.getElementById('hirePopup').classList.add('hidden');
-      document.getElementById('hirePopup').classList.remove('flex');
-    }
-
-    function submitPopup() {
-      const phone = document.getElementById('phoneInput').value.trim();
-      const time = document.getElementById('timeInput').value.trim();
-      
-      if (!phone) {
-        alert("Please enter your phone number");
-        return;
-      }
-
-      const subject = "Hiring Inquiry - Full-Stack DevOps Programmer";
-      const body = `Hi Jay,%0A%0AI'm interested in hiring an experienced full-stack DevOps programmer who works remotely.%0A%0APhone: ${phone}%0ABest time to call: ${time}%0A%0ALet's get started right away!`;
-      
-      window.location.href = `mailto:jaymcdonough.com@gmail.com?subject=${subject}&body=${body}`;
-      closePopup();
-      
-      setTimeout(() => {
-        alert("Thank you! I'll reach out shortly to schedule our call.");
-      }, 800);
-    }
-
-    // Show popup after 5 seconds (once per session)
-    setTimeout(() => {
-      if (!localStorage.getItem('popupShown')) {
-        showPopup();
-        localStorage.setItem('popupShown', 'true');
-      }
-    }, 5000);
 
 
 
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <style>
-    body { font-family: system-ui, sans-serif; }
-    .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%); }
-    .glow-cyan { box-shadow: 0 0 30px rgba(34, 211, 238, 0.7); }
-    .typing { overflow: hidden; white-space: nowrap; border-right: 3px solid #22d3ee; animation: blink 0.7s step-end infinite; }
-    @keyframes blink { 50% { border-color: transparent; } }
-    .hero-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-    @media (min-width: 768px) { 
-      .hero-grid { grid-template-columns: 1fr 1fr; } 
-      .hero-text { order: 1; }
-      .hero-image { order: 2; }
-    }
-  </style>
-
-  <!-- popup -->
-<div id="popup-overlay" class="overlay">
-    <div class="popup-content">
-        <h2>Welcome!</h2>
-        <p>Thanks for stopping by. Check out my latest project!</p>
-        <button id="close-btn">Close</button>
-    </div>
-</div>
- <!-- popup end -->
-</head>
 
 
 </body>
