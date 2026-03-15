@@ -31,8 +31,8 @@
         <a href="#about" class="nav-link hover:text-cyan-400 transition">About</a>
         <a href="#experience" class="nav-link hover:text-cyan-400 transition">Experience</a>
         <a href="#projects" class="nav-link hover:text-cyan-400 transition">Projects</a>
-        <a href="#book" class="nav-link hover:text-cyan-400 transition">Book a Meeting</a>
-        <a href="#contact" class="nav-link hover:text-cyan-400 transition">Contact</a>
+        <a href="#book" class="nav-link hover:text-cyan-400 transition">Schedule Video Call</a>
+        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2JZXHq9Oq4XIFQtN_g85b7HIhi66Sl5mbfXW7G60RElmUgpGEVmlL3ETEYRvqb_wxChjajogmn?gv=true" class="nav-link hover:text-cyan-400 transition">Contact</a>
       </div>
     </div>
   </nav>
@@ -155,10 +155,10 @@
   <!-- Book a Meeting -->
   <section id="book" class="bg-gradient-to-b from-slate-900 to-slate-950 py-24" data-aos="fade-up">
     <div class="max-w-6xl mx-auto px-6 text-center">
-      <h2 class="text-5xl font-bold mb-6">Book a Meeting</h2>
+      <h2 class="text-5xl font-bold mb-6">Schedule Video Call with Jay</h2>
       <p class="text-xl mb-12 max-w-lg mx-auto">Let’s talk. I’ll add it straight to your Google Calendar and drop in a Google Meet link.</p>
       <div class="max-w-md mx-auto bg-slate-900 p-10 rounded-3xl">
-        <button onclick="quickCalendar()" class="w-full bg-cyan-400 text-slate-950 py-6 rounded-2xl text-xl font-bold mb-4 hover:bg-cyan-300 transition">Add to Google Calendar</button>
+        <button onclick="quickCalendar()" class="w-full bg-cyan-400 text-slate-950 py-6 rounded-2xl text-xl font-bold mb-4 hover:bg-cyan-300 transition">Select an appointment time</button>
       </div>
     </div>
   </section>
@@ -178,7 +178,7 @@
       <p class="text-cyan-400 text-center text-lg mb-8">If so — let's get to know each other.</p>
       
       <div class="space-y-6">
-        <div>
+        <div>+
           <label class="block text-sm text-slate-400 mb-2">Your Phone Number</label>
           <input id="phoneInput" type="tel" class="w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-cyan-400" placeholder="(555) 123-4567">
         </div>
@@ -223,7 +223,7 @@
     setTimeout(type, 800);
 
     function quickCalendar() {
-      const url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meeting+with+Jay+McDonough&dates=20260325T140000Z/20260325T150000Z&details=Web+project+discussion&location=Google+Meet";
+      const url = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2JZXHq9Oq4XIFQtN_g85b7HIhi66Sl5mbfXW7G60RElmUgpGEVmlL3ETEYRvqb_wxChjajogmn?gv=true";
       window.open(url, '_blank');
     }
     function quickMeet() {
@@ -274,7 +274,7 @@
 
     // Your existing quickCalendar and quickMeet functions
     function quickCalendar() {
-      const url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Meeting+with+Jay+McDonough&dates=20260325T140000Z/20260325T150000Z&details=Web+project+discussion&location=Google+Meet";
+      const url = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2JZXHq9Oq4XIFQtN_g85b7HIhi66Sl5mbfXW7G60RElmUgpGEVmlL3ETEYRvqb_wxChjajogmn?gv=true";
       window.open(url, '_blank');
     }
     function quickMeet() {
