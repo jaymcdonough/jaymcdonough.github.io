@@ -171,7 +171,7 @@
       <h3 class="text-3xl font-bold text-center mb-6">Quick Question</h3>
       
       <p class="text-xl text-center leading-relaxed mb-8">
-        Are you looking to hire an experienced full-stack DevOps programmer<br>
+        Are you looking to hire an experienced full-stack programmer<br>
         that is accustomed to working remotely?
       </p>
       
@@ -253,15 +253,46 @@
         return;
       }
 
-      const subject = "Hiring Inquiry - Full-Stack DevOps Programmer";
-      const body = `Hi Jay,%0A%0AI'm interested in hiring an experienced full-stack DevOps programmer who works remotely.%0A%0APhone: ${phone}%0ABest time to call: ${time}%0A%0ALet's get started right away!`;
-      
-      window.location.href = `mailto:jaymcdonough2007@gmail.com?subject=${subject}&body=${body}`;
-      closePopup();
-      
-      setTimeout(() => {
-        alert("Thank you! I'll reach out to you shortly.");
-      }, 800);
+      // Prepare data for Zapier webhook
+      const data = {
+        phone: phone,
+        bestTime: time,
+        timestamp: new Date().toISOString(),
+        source: 'website_popup'
+      };
+
+      // Replace 'YOUR_ZAPIER_WEBHOOK_URL' with your actual Zapier webhook URL
+      const webhookUrl = 'https://hooks.zapier.com/hooks/catch/26834044/uxvvdh4/';
+
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Notification sent successfully via Zapier');
+          closePopup();
+          setTimeout(() => {
+            alert("Thank you! I'll reach out to you shortly.");
+          }, 800);
+        } else {
+          throw new Error('Failed to send notification');
+        }
+      })
+      .catch(error => {
+        console.error('Error sending notification:', error);
+        // Fallback to mailto if Zapier fails
+        const subject = "Hiring Inquiry - Full-Stack DevOps Programmer";
+        const body = `Hi Jay,%0A%0AI'm interested in hiring an experienced full-stack DevOps programmer who works remotely.%0A%0APhone: ${phone}%0ABest time to call: ${time}%0A%0ALet's get started right away!`;
+        window.open(`mailto:jaymcdonough2007@gmail.com?subject=${subject}&body=${body}`, '_blank');
+        closePopup();
+        setTimeout(() => {
+          alert("Thank you! I'll reach out to you shortly.");
+        }, 800);
+      });
     }
 
     // Show popup after 5 seconds (once per session)
