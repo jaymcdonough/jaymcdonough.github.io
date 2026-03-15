@@ -11,7 +11,7 @@
     body { font-family: system-ui, sans-serif; }
     .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%); }
     .glow-cyan { box-shadow: 0 0 30px rgba(34, 211, 238, 0.7); }
-    .typing { overflow: hidden; white-space: nowrap; border-right: 3px solid #22d3ee; animation: blink 0.7s step-end infinite; }
+    .typing { overflow: hidden; white-space: normal; word-break: break-word; border-right: 3px solid #22d3ee; animation: blink 0.7s step-end infinite; }
     @keyframes blink { 50% { border-color: transparent; } }
     .hero-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
     @media (min-width: 768px) { 
@@ -40,12 +40,10 @@
   <!-- Hero -->
   <section class="hero-bg min-h-screen flex items-center pt-20" data-aos="fade-down">
     <div class="max-w-6xl mx-auto px-6 hero-grid items-center">
-      <div class="hero-text">
-        <h2 class="text-5xl md:text-7xl font-bold leading-tight mb-4">Jay McDonough</h2>
-        <br><p id="typing" class="text-3xl text-cyan-400 font-light mb-6 typing"></p>
-        <!-- BREAK ADDED HERE (prevents animation from squeezing the photo) -->
-      
-        <p class="text-xl max-w-lg mb-8">26 years owning my own web business. PHP8 • Laravel • SQL Server • JavaScript • Now building smarter with AI.</p>
+      <div class="hero-text max-w-xl mx-auto md:mx-0 text-center md:text-left">
+        <h2 class="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4">Jay McDonough</h2>
+        <p id="typing" class="text-2xl md:text-3xl text-cyan-400 font-light mb-6 typing"></p>
+        <p class="text-lg md:text-xl max-w-lg mx-auto md:mx-0 mb-8">26 years owning my own web business. PHP8 • Laravel • SQL Server • JavaScript • Now building smarter with AI.</p>
         <div class="flex gap-4">
           <a href="#book" class="bg-cyan-400 text-slate-950 px-8 py-4 rounded-2xl font-semibold hover:bg-cyan-300 transition glow-cyan">Book a Meeting</a>
           <a href="resume.pdf" download class="border border-cyan-400 px-8 py-4 rounded-2xl hover:bg-slate-800 transition">Download Updated Resume</a>
